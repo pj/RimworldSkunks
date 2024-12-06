@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <GeneDef>
+    <defName>Flatulence</defName>
+    <label>flatulence</label>
+    <description>Carriers are able to expel a foul smelling gas from glands in their bottom. The horrible stench causes people and animals to vomit.</description>
+    <iconPath>UI/Icons/Genes/Gene_Firespew</iconPath>
+    <displayCategory>Ability</displayCategory>
+    <marketValueFactor>1.5</marketValueFactor>
+    <abilities>
+      <li>Flatulence</li>
+    </abilities>
+    <descriptionHyperlinks>
+      <AbilityDef>Flatulence</AbilityDef>
+    </descriptionHyperlinks>
+    <biostatMet>-2</biostatMet>
+    <symbolPack>
+      <wholeNameSymbols>
+        <li><symbol>farter</symbol></li>
+        <li><symbol>flatulator</symbol></li>
+      </wholeNameSymbols>
+      <prefixSymbols>
+        <li><symbol>flatulent</symbol></li>
+        <li><symbol>flatulator</symbol></li>
+      </prefixSymbols>
+      <suffixSymbols>
+        <li><symbol>stinker</symbol></li>
+        <li><symbol>flatulator</symbol></li>
+      </suffixSymbols>
+    </symbolPack>
+  </GeneDef>
+
+  <AbilityDef>
+    <defName>Flatulence</defName>
+    <label>flatulence</label>
+    <description>Carriers are able to expel a foul smelling gas from glands in their bottom. The horrible stench causes people and animals to vomit.</description>
+    <iconPath>UI/Abilities/MechSmokepop</iconPath>
+    <cooldownTicksRange>30000</cooldownTicksRange><!-- 30 seconds -->
+    <targetRequired>false</targetRequired>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>1</warmupTime>
+      <range>3.9</range>
+      <drawAimPie>false</drawAimPie>    
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Flatulence.CompProperties_AbilityFlatulence">
+        <flatulenceRadius>5.5</flatulenceRadius>
+        <clamorType>Ability</clamorType>
+        <clamorRadius>15</clamorRadius>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <DamageDef>
+    <defName>Flatulence</defName>
+    <label>flatulence</label>
+    <canInterruptJobs>false</canInterruptJobs>
+    <makesBlood>false</makesBlood>
+    <defaultDamage>0</defaultDamage>
+    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+    <explosionColorEdge>(0.44, 0.24, 0.01, 0.05)</explosionColorEdge>
+    <harmsHealth>false</harmsHealth>
+    <soundExplosion>Explosion_Smoke</soundExplosion>
+    <combatLogRules>Damage_Smoke</combatLogRules>
+  </DamageDef>
+
+<!--
+  <HediffDef>
+    <defName>ToxGasExposure</defName>
+    <label>tox gas</label>
+    <description>Aftereffects of exposure to tox gas, a poisonous chemical gas. It burns the lungs and eyes, causing a temporary shortness of breath and reduction in sight. Continued exposure to tox gas results in toxic buildup and eventually death.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <maxSeverity>3</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <canApplyDodChanceForCapacityChanges>true</canApplyDodChanceForCapacityChanges>
+    <stages>
+      <li>
+        <label>mild</label>
+        <minSeverity>1</minSeverity>
+        <painOffset>0.1</painOffset>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.1</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>-0.15</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>2</minSeverity>
+        <painOffset>0.15</painOffset>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.25</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>-0.30</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>severe</label>
+        <minSeverity>3</minSeverity>
+        <painOffset>0.25</painOffset>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.40</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>-0.60</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_SeverityFromGasDensityDirect">
+        <gasType>ToxGas</gasType>
+        <densityStages>
+          <li>0.2</li>
+          <li>0.5</li>
+          <li>1</li>
+        </densityStages>
+      </li>
+    </comps>
+  </HediffDef> -->
+  
+</Defs>

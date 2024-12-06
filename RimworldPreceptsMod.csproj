@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<OutputType>Library</OutputType>
+		<LangVersion>preview</LangVersion>
+		<RootNamespace>HelloWorld</RootNamespace>
+		<AssemblyName>HelloWorld</AssemblyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>Assemblies</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- If you're using Steam, adjust this path to your RimWorld installation -->
+        <Reference Include="Assembly-CSharp">
+			<HintPath>../../Contents/Resources/Data/Managed/Assembly-CSharp.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>../../Contents/Resources/Data/Managed/UnityEngine.CoreModule.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+
+	<!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\YourMod\Assemblies" />
+	</Target> -->
+</Project> 

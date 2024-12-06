@@ -51,9 +51,11 @@
     </verbProperties>
     <comps>
       <li Class="Flatulence.CompProperties_AbilityFlatulence">
-        <flatulenceRadius>5.5</flatulenceRadius>
         <clamorType>Ability</clamorType>
         <clamorRadius>15</clamorRadius>
+        <cellsToFill>45</cellsToFill>
+        <durationSeconds>12.75</durationSeconds>
+        <flatulenceRadius>5.5</flatulenceRadius>
       </li>
     </comps>
   </AbilityDef>

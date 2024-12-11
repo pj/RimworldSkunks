@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net48</TargetFramework>
 		<OutputType>Library</OutputType>
 		<LangVersion>preview</LangVersion>
-		<RootNamespace>HelloWorld</RootNamespace>
-		<AssemblyName>HelloWorld</AssemblyName>
+		<RootNamespace>RimworldSkunks</RootNamespace>
+		<AssemblyName>RimworldSkunks</AssemblyName>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>Assemblies</OutputPath>

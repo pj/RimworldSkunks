@@ -4,7 +4,7 @@ using Verse;
 using RimWorld;
 using UnityEngine;
 
-namespace Flatulence;
+namespace RimworldSkunks;
 
 public class CompAbilityEffect_Flatulence : CompAbilityEffect
 {
@@ -13,6 +13,9 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
     private int remainingGas;
     private int TotalGas => Mathf.CeilToInt(Props.cellsToFill * 255f);
     private float GasReleasedPerTick => (float)TotalGas / Props.durationSeconds / 60f;
+
+    [Unsaved(false)]
+    private Effecter effecter;
 
     public bool ShouldHaveInspectString
     {
@@ -32,12 +35,12 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
     //     gasDensity = new uint[parent.pawn.MapHeld.cellIndices.NumGridCells];
     // }
 
-    public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
+    public void StartRelease()
     {
-        Log.Message("Apply Flatulence");
+        Log.Message(" Flatulence");
         started = true;
         gasDensity = new uint[parent.pawn.MapHeld.cellIndices.NumGridCells];
-        base.Apply(target, dest);
+        remainingGas = TotalGas;
         // DamageDef flatulence = DefDatabase<DamageDef>.GetNamed("Flatulence");
         // Log.Message("Flatulence: " + flatulence.label);
         // GenExplosion.DoExplosion(
@@ -60,6 +63,14 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
             Log.Message(mapHeld.ToString());
             return;
         }
+        if (Props.effecterReleasing != null)
+        {
+            if (effecter == null)
+            {
+                effecter = Props.effecterReleasing.Spawn(parent.pawn, TargetInfo.Invalid);
+            }
+            effecter.EffectTick(parent.pawn, TargetInfo.Invalid);
+        }
         if (remainingGas > 0 && mapHeld.IsHashIntervalTick(30))
         {
             Log.Message("Adding gas");
@@ -79,7 +90,7 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
             RecalculateEverHadGas();
         }
 
-        if (anyGasEverAdded)
+        if (!anyGasEverAdded)
         {
             return;
         }

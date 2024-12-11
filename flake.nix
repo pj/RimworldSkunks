@@ -1,5 +1,5 @@
 {
-  description = "Flake for testing rimworld dev";
+  description = "Flake for developing Rimworld Skunks";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
@@ -12,15 +12,8 @@
         pkgs = inputs.nixpkgs.legacyPackages.${system};
       in
       {
-        # packages = {
-
-        # };
         devShells.default = pkgs.mkShell {
-            # packages = with pkgs; [
-
-            # avalonia-ilspy
-            # ];
-          buildInputs = with pkgs; [
+          packages = with pkgs; [
             dotnetCorePackages.sdk_9_0
           ];
         };

@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+  <EffecterDef>
+    <defName>FlatulenceReleasing</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
+        <soundDef>GasReleasing</soundDef>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <positionRadius>0.3</positionRadius>
+        <fleckDef>Fleck_ToxGasSmall</fleckDef>
+        <chancePerTick>0.1</chancePerTick>
+        <scale>0.5~1</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
 
   <GeneDef>
     <defName>Flatulence</defName>
@@ -41,21 +58,29 @@
     <hostile>false</hostile>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
     <verbProperties>
-      <verbClass>Verb_CastAbility</verbClass>
+      <!-- <verbClass>Verb_CastAbility</verbClass>
       <warmupTime>1</warmupTime>
       <range>3.9</range>
       <drawAimPie>false</drawAimPie>    
       <targetParams>
         <canTargetSelf>true</canTargetSelf>
-      </targetParams>
+      </targetParams> -->
+      <verbClass>Flatulence.Verb_DeployFlatulence</verbClass>
+      <!-- <nonInterruptingSelfCast>true</nonInterruptingSelfCast> -->
+      <!-- <targetable>false</targetable> -->
+      <!-- <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      </targetParams> -->
     </verbProperties>
     <comps>
       <li Class="Flatulence.CompProperties_AbilityFlatulence">
         <clamorType>Ability</clamorType>
         <clamorRadius>15</clamorRadius>
         <cellsToFill>45</cellsToFill>
-        <durationSeconds>12.75</durationSeconds>
+        <durationSeconds>2</durationSeconds>
         <flatulenceRadius>5.5</flatulenceRadius>
+        <effecterReleasing>FlatulenceReleasing</effecterReleasing>
       </li>
     </comps>
   </AbilityDef>

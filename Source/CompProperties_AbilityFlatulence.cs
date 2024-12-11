@@ -1,7 +1,7 @@
 using Verse;
 using RimWorld;
 
-namespace Flatulence;
+namespace RimworldSkunks;
 
 public class CompProperties_AbilityFlatulence : CompProperties_AbilityEffect
 {
@@ -9,6 +9,7 @@ public class CompProperties_AbilityFlatulence : CompProperties_AbilityEffect
 
     public float cellsToFill;
     public float durationSeconds;
+    public EffecterDef effecterReleasing;
 
     public CompProperties_AbilityFlatulence()
     {

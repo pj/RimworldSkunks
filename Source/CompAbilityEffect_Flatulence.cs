@@ -30,10 +30,6 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
     }
 
     private bool started = false;
-    // public CompAbilityEffect_Flatulence()
-    // {
-    //     gasDensity = new uint[parent.pawn.MapHeld.cellIndices.NumGridCells];
-    // }
 
     public void StartRelease()
     {
@@ -41,16 +37,6 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
         started = true;
         gasDensity = new uint[parent.pawn.MapHeld.cellIndices.NumGridCells];
         remainingGas = TotalGas;
-        // DamageDef flatulence = DefDatabase<DamageDef>.GetNamed("Flatulence");
-        // Log.Message("Flatulence: " + flatulence.label);
-        // GenExplosion.DoExplosion(
-        //     target.Cell, 
-        //     parent.pawn.MapHeld, 
-        //     Props.flatulenceRadius, 
-        //     flatulence, 
-        //     null, -1, -1f, null, null, null, null, null, 0f, 1, 
-        //     GasType.RotStink
-        // );
     }
 
     public override void CompTick()
@@ -76,12 +62,15 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
             Log.Message("Adding gas");
             Log.Message(remainingGas.ToString());
             int num = Mathf.Min(remainingGas, Mathf.RoundToInt(GasReleasedPerTick * 30f));
-            AddGas(mapHeld, parent.pawn.PositionHeld, num);
+            AddGas(mapHeld, parent.pawn.PositionHeld, 255 * num);
+            // GasUtility.AddGas(parent.pawn.PositionHeld, parent.pawn.MapHeld, GasType.ToxGas, num);
             remainingGas -= num;
             if (remainingGas <= 0)
             {
                 started = false;
                 remainingGas = TotalGas;
+                effecter.Cleanup();
+                effecter = null;
             }
         }
 
@@ -96,10 +85,10 @@ public class CompAbilityEffect_Flatulence : CompAbilityEffect
         }
     }
 
-    public override void DrawEffectPreview(LocalTargetInfo target)
-    {
-        GenDraw.DrawRadiusRing(target.Cell, Props.flatulenceRadius);
-    }
+    // public override void DrawEffectPreview(LocalTargetInfo target)
+    // {
+    //     GenDraw.DrawRadiusRing(target.Cell, Props.flatulenceRadius);
+    // }
 
     public override string CompInspectStringExtra()
     {

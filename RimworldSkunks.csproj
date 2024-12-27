@@ -21,6 +21,10 @@
 			<HintPath>../../Contents/Resources/Data/Managed/UnityEngine.CoreModule.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
+		<Reference Include="0Harmony">
+			<HintPath>/Users/pauljohnson/Library/Application Support/Steam/steamapps/workshop/content/294100/2009463077/Current/Assemblies/0Harmony.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
 	</ItemGroup>
 
 	<!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">

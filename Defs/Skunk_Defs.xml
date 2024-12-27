@@ -11,7 +11,7 @@
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <positionRadius>0.3</positionRadius>
         <fleckDef>Fleck_ToxGasSmall</fleckDef>
-        <chancePerTick>0.1</chancePerTick>
+        <chancePerTick>0.5</chancePerTick>
         <scale>0.5~1</scale>
         <spawnLocType>OnSource</spawnLocType>
       </li>
@@ -58,28 +58,14 @@
     <hostile>false</hostile>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
     <verbProperties>
-      <!-- <verbClass>Verb_CastAbility</verbClass>
-      <warmupTime>1</warmupTime>
-      <range>3.9</range>
-      <drawAimPie>false</drawAimPie>    
-      <targetParams>
-        <canTargetSelf>true</canTargetSelf>
-      </targetParams> -->
-      <verbClass>Flatulence.Verb_DeployFlatulence</verbClass>
-      <!-- <nonInterruptingSelfCast>true</nonInterruptingSelfCast> -->
-      <!-- <targetable>false</targetable> -->
-      <!-- <targetParams>
-        <canTargetSelf>true</canTargetSelf>
-      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
-      </targetParams> -->
+      <verbClass>RimworldSkunks.Verb_DeployFlatulence</verbClass>
     </verbProperties>
     <comps>
-      <li Class="Flatulence.CompProperties_AbilityFlatulence">
+      <li Class="RimworldSkunks.CompProperties_AbilityFlatulence">
         <clamorType>Ability</clamorType>
         <clamorRadius>15</clamorRadius>
         <cellsToFill>45</cellsToFill>
         <durationSeconds>2</durationSeconds>
-        <flatulenceRadius>5.5</flatulenceRadius>
         <effecterReleasing>FlatulenceReleasing</effecterReleasing>
       </li>
     </comps>

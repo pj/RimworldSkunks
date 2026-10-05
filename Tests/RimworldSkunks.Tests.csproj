@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+		<PackageReference Include="xunit" Version="2.9.*" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.*" />
+		<PackageReference Include="Xunit.SkippableFact" Version="1.5.*" />
+	</ItemGroup>
+
+	<!-- The test driver lives in its own repository, checked out next to this one. -->
+	<ItemGroup>
+		<ProjectReference Include="../../RimworldDriver/Client/RimworldDriver.Client.csproj" />
+	</ItemGroup>
+
+	<!-- Running the tests rebuilds the mod first, and tells them where the mod folder is. -->
+	<ItemGroup>
+		<ProjectReference Include="../RimworldSkunks.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" UndefineProperties="TargetFramework" Private="false" />
+		<AssemblyMetadata Include="RimworldSkunks.ModPath" Value="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))" />
+	</ItemGroup>
+</Project>

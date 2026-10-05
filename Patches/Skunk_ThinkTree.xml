@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- The wander behaviour is keyed on a fixed list of mental states, so the stench daze has to be added to it. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThinkTreeDef//li[@Class="ThinkNode_ConditionalMentalStates"]/states[li="WanderConfused"]</xpath>
+    <value>
+      <li>Skunk_StenchDaze</li>
+    </value>
+  </Operation>
+
+</Patch>

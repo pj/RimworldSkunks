@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  <EffecterDef>
-    <defName>FlatulenceReleasing</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
-        <soundDef>GasReleasing</soundDef>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
-        <positionRadius>0.3</positionRadius>
-        <fleckDef>Fleck_ToxGasSmall</fleckDef>
-        <chancePerTick>0.5</chancePerTick>
-        <scale>0.5~1</scale>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-    </children>
-  </EffecterDef>
+
+  <!-- ============ Xenotype ============ -->
+
+  <XenotypeDef>
+    <defName>Skunk</defName>
+    <label>skunk</label>
+    <description>Skunks descend from scouts engineered for long solo patrols on hostile frontier worlds. A coat of dense fur and a bushy tail keep them warm through long watches in the open. They were built to hold ground where the wildlife kills settlers faster than ships can replace them, so they breed fast: short pregnancies, twins more often than not, and no patience for monogamy. The price is a slight frame that hits weakly, a genome that frays with age, and a feeble immune system.\n\nTheir real defence is a pair of modified glands that can vent a thick brown cloud of unbelievably foul gas. Anyone caught in it is left retching and stumbling about in a daze, while the skunk - long since used to the smell - strolls away.</description>
+    <descriptionShort>Furry scouts who breed fast, hit weakly and sicken easily. Skunks can vent a cloud of foul brown gas that leaves anyone nearby vomiting and dazed.</descriptionShort>
+    <!-- Placeholder: reuses a vanilla icon until the mod ships its own -->
+    <iconPath>UI/Icons/Xenotypes/Yttakin</iconPath>
+    <inheritable>true</inheritable>
+    <!-- Chance weight for pawns generated without a faction (wanderers, refugees, pod crashes). Baseliner is 40, other vanilla xenotypes 1. -->
+    <factionlessGenerationWeight>4</factionlessGenerationWeight>
+    <genes>
+      <li>Skunk_Flatulence</li>
+      <li>Furskin</li>
+      <li>Tail_Furry</li>
+      <li>Hair_InkBlack</li>
+      <li>Skunk_Prolific</li>
+      <li>Skunk_Promiscuous</li>
+      <li>MeleeDamage_Weak</li>
+      <li>Instability_Mild</li>
+      <li>Immunity_Weak</li>
+    </genes>
+  </XenotypeDef>
+
+  <!-- ============ Gene ============ -->
 
   <GeneDef>
-    <defName>Flatulence</defName>
+    <defName>Skunk_Flatulence</defName>
     <label>flatulence</label>
-    <description>Carriers are able to expel a foul smelling gas from glands in their bottom. The horrible stench causes people and animals to vomit.</description>
+    <description>Carriers are able to expel a foul smelling brown gas from glands in their bottom. The horrible stench causes people and animals to vomit and stagger about in a daze. Carriers are immune to the smell.</description>
     <iconPath>UI/Icons/Genes/Gene_Firespew</iconPath>
     <displayCategory>Ability</displayCategory>
     <marketValueFactor>1.5</marketValueFactor>
     <abilities>
-      <li>Flatulence</li>
+      <li>Skunk_Flatulence</li>
     </abilities>
     <descriptionHyperlinks>
-      <AbilityDef>Flatulence</AbilityDef>
+      <AbilityDef>Skunk_Flatulence</AbilityDef>
+      <HediffDef>Skunk_Stench</HediffDef>
     </descriptionHyperlinks>
     <biostatMet>-2</biostatMet>
     <symbolPack>
@@ -39,7 +50,7 @@
       </wholeNameSymbols>
       <prefixSymbols>
         <li><symbol>flatulent</symbol></li>
-        <li><symbol>flatulator</symbol></li>
+        <li><symbol>stink</symbol></li>
       </prefixSymbols>
       <suffixSymbols>
         <li><symbol>stinker</symbol></li>
@@ -48,108 +59,189 @@
     </symbolPack>
   </GeneDef>
 
+  <!-- Breeding. What these genes do beyond the stats is in Source/SkunkBreeding.cs. -->
+
+  <GeneDef>
+    <defName>Skunk_Prolific</defName>
+    <label>prolific</label>
+    <labelShortAdj>prolific</labelShortAdj>
+    <description>Carriers of this gene were engineered to repopulate quickly on worlds that kill colonists faster than ships can bring them. They conceive easily, carry their young for a third of the usual time, and usually bear twins or triplets.</description>
+    <iconPath>UI/Icons/Genes/Gene_Fertile</iconPath>
+    <displayCategory>Reproduction</displayCategory>
+    <displayOrderInCategory>120</displayOrderInCategory>
+    <exclusionTags>
+      <li>Fertility</li>
+    </exclusionTags>
+    <statFactors>
+      <Fertility>2</Fertility>
+    </statFactors>
+    <customEffectDescriptions>
+      <li>Pregnancy takes a third of the usual time.</li>
+      <li>60% chance of twins and 10% chance of triplets when the carrier gives birth.</li>
+    </customEffectDescriptions>
+    <biostatCpx>3</biostatCpx>
+    <biostatMet>-2</biostatMet>
+    <modExtensions>
+      <li Class="RimworldSkunks.BreedingExtension">
+        <gestationSpeedFactor>3</gestationSpeedFactor>
+        <twinChance>0.6</twinChance>
+        <tripletChance>0.1</tripletChance>
+      </li>
+    </modExtensions>
+    <symbolPack>
+      <prefixSymbols>
+        <li><symbol>brood</symbol></li>
+        <li><symbol>litter</symbol></li>
+        <li><symbol>twin</symbol></li>
+      </prefixSymbols>
+    </symbolPack>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>Skunk_Promiscuous</defName>
+    <label>promiscuous</label>
+    <labelShortAdj>promiscuous</labelShortAdj>
+    <description>Carriers of this gene have a strong drive for lovin' and no instinct for pair-bonding. They happily keep several lovers or spouses at once, whatever their ideoligion says about it, and never give up one partner to take another.</description>
+    <iconPath>UI/Icons/Genes/Gene_HighLibido</iconPath>
+    <displayCategory>Reproduction</displayCategory>
+    <displayOrderInCategory>20</displayOrderInCategory>
+    <exclusionTags>
+      <li>Libido</li>
+    </exclusionTags>
+    <lovinMTBFactor>0.4</lovinMTBFactor>
+    <customEffectDescriptions>
+      <li>Greatly increases the chance of lovin'.</li>
+      <li>Will take any number of lovers and spouses, and keeps existing partners when starting a new romance.</li>
+    </customEffectDescriptions>
+    <biostatCpx>2</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <modExtensions>
+      <li Class="RimworldSkunks.BreedingExtension">
+        <unlimitedPartners>true</unlimitedPartners>
+      </li>
+    </modExtensions>
+    <symbolPack>
+      <prefixSymbols>
+        <li><symbol>flirt</symbol></li>
+        <li><symbol>lust</symbol></li>
+      </prefixSymbols>
+    </symbolPack>
+  </GeneDef>
+
+  <!-- Stands in for the "has N partners" events the game asks ideoligions about. No precept objects to it. -->
+  <HistoryEventDef>
+    <defName>Skunk_TookPartner</defName>
+    <label>took a partner</label>
+  </HistoryEventDef>
+
+  <!-- ============ Ability ============ -->
+
   <AbilityDef>
-    <defName>Flatulence</defName>
+    <defName>Skunk_Flatulence</defName>
     <label>flatulence</label>
-    <description>Carriers are able to expel a foul smelling gas from glands in their bottom. The horrible stench causes people and animals to vomit.</description>
+    <description>Expel a cloud of foul smelling brown gas. Anyone caught in the cloud starts vomiting, and those who breathe it for long are left wandering in a daze. Those with the flatulence gene are immune.</description>
     <iconPath>UI/Abilities/MechSmokepop</iconPath>
-    <cooldownTicksRange>30000</cooldownTicksRange><!-- 30 seconds -->
-    <targetRequired>false</targetRequired>
-    <hostile>false</hostile>
+    <cooldownTicksRange>30000</cooldownTicksRange><!-- 12 hours -->
+    <showPsycastEffects>false</showPsycastEffects>
+    <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <hostile>false</hostile>
+    <targetRequired>false</targetRequired>
     <verbProperties>
-      <verbClass>RimworldSkunks.Verb_DeployFlatulence</verbClass>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>flatulence</label>
+      <drawAimPie>false</drawAimPie>
+      <warmupTime>0.5</warmupTime>
+      <violent>false</violent>
+      <targetable>false</targetable>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+      </targetParams>
+      <soundCast>GasPack_Deploy</soundCast>
     </verbProperties>
     <comps>
       <li Class="RimworldSkunks.CompProperties_AbilityFlatulence">
         <clamorType>Ability</clamorType>
         <clamorRadius>15</clamorRadius>
         <cellsToFill>45</cellsToFill>
-        <durationSeconds>2</durationSeconds>
-        <effecterReleasing>FlatulenceReleasing</effecterReleasing>
       </li>
     </comps>
   </AbilityDef>
 
-  <DamageDef>
-    <defName>Flatulence</defName>
-    <label>flatulence</label>
-    <canInterruptJobs>false</canInterruptJobs>
-    <makesBlood>false</makesBlood>
-    <defaultDamage>0</defaultDamage>
-    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
-    <explosionColorEdge>(0.44, 0.24, 0.01, 0.05)</explosionColorEdge>
-    <harmsHealth>false</harmsHealth>
-    <soundExplosion>Explosion_Smoke</soundExplosion>
-    <combatLogRules>Damage_Smoke</combatLogRules>
-  </DamageDef>
+  <!-- ============ Gas effects ============ -->
 
-<!--
+  <!-- Severity is pushed up by SkunkGasGrid while a pawn stands in the gas and falls off on its own afterwards. -->
   <HediffDef>
-    <defName>ToxGasExposure</defName>
-    <label>tox gas</label>
-    <description>Aftereffects of exposure to tox gas, a poisonous chemical gas. It burns the lungs and eyes, causing a temporary shortness of breath and reduction in sight. Continued exposure to tox gas results in toxic buildup and eventually death.</description>
+    <defName>Skunk_Stench</defName>
+    <label>skunk stench</label>
+    <description>Overpowering nausea from breathing skunk gas. The victim retches uncontrollably, and a heavy dose leaves them stumbling around in a daze. It passes within a couple of hours of reaching clean air.</description>
     <hediffClass>HediffWithComps</hediffClass>
-    <maxSeverity>3</maxSeverity>
-    <initialSeverity>1</initialSeverity>
-    <canApplyDodChanceForCapacityChanges>true</canApplyDodChanceForCapacityChanges>
+    <defaultLabelColor>(0.62, 0.45, 0.2)</defaultLabelColor>
+    <initialSeverity>0.05</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <isBad>true</isBad>
+    <makesSickThought>true</makesSickThought>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-12</severityPerDay>
+      </li>
+    </comps>
     <stages>
       <li>
-        <label>mild</label>
-        <minSeverity>1</minSeverity>
-        <painOffset>0.1</painOffset>
+        <label>nauseated</label>
+        <vomitMtbDays>0.03</vomitMtbDays>
         <capMods>
           <li>
-            <capacity>Sight</capacity>
+            <capacity>Moving</capacity>
             <offset>-0.1</offset>
           </li>
           <li>
-            <capacity>Breathing</capacity>
+            <capacity>Manipulation</capacity>
+            <offset>-0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>overwhelmed</label>
+        <minSeverity>0.5</minSeverity>
+        <vomitMtbDays>0.01</vomitMtbDays>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
             <offset>-0.15</offset>
           </li>
-        </capMods>
-      </li>
-      <li>
-        <label>moderate</label>
-        <minSeverity>2</minSeverity>
-        <painOffset>0.15</painOffset>
-        <capMods>
           <li>
-            <capacity>Sight</capacity>
-            <offset>-0.25</offset>
+            <capacity>Moving</capacity>
+            <offset>-0.2</offset>
           </li>
           <li>
-            <capacity>Breathing</capacity>
-            <offset>-0.30</offset>
+            <capacity>Manipulation</capacity>
+            <offset>-0.2</offset>
           </li>
         </capMods>
-      </li>
-      <li>
-        <label>severe</label>
-        <minSeverity>3</minSeverity>
-        <painOffset>0.25</painOffset>
-        <capMods>
+        <mentalStateGivers>
           <li>
-            <capacity>Sight</capacity>
-            <offset>-0.40</offset>
+            <mentalState>Skunk_StenchDaze</mentalState>
+            <mtbDays>0.005</mtbDays>
           </li>
-          <li>
-            <capacity>Breathing</capacity>
-            <offset>-0.60</offset>
-          </li>
-        </capMods>
+        </mentalStateGivers>
       </li>
     </stages>
-    <comps>
-      <li Class="HediffCompProperties_SeverityFromGasDensityDirect">
-        <gasType>ToxGas</gasType>
-        <densityStages>
-          <li>0.2</li>
-          <li>0.5</li>
-          <li>1</li>
-        </densityStages>
-      </li>
-    </comps>
-  </HediffDef> -->
-  
+  </HediffDef>
+
+  <!-- A short version of confused wandering. Patches/Skunk_ThinkTree.xml hooks it into the wander think tree. -->
+  <MentalStateDef ParentName="BaseMentalState">
+    <defName>Skunk_StenchDaze</defName>
+    <label>stench daze</label>
+    <stateClass>MentalState_WanderConfused</stateClass>
+    <category>Misc</category>
+    <minTicksBeforeRecovery>600</minTicksBeforeRecovery>
+    <maxTicksBeforeRecovery>1800</maxTicksBeforeRecovery>
+    <recoveryMtbDays>0.01</recoveryMtbDays>
+    <blockNormalThoughts>true</blockNormalThoughts>
+    <nameColor>(0.62, 0.45, 0.2)</nameColor>
+    <recoveryMessage>{0} has shaken off the stench daze.</recoveryMessage>
+    <baseInspectLine>Mental state: Dazed by stench</baseInspectLine>
+  </MentalStateDef>
+
 </Defs>
